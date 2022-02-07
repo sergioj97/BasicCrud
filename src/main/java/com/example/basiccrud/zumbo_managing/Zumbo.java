@@ -1,4 +1,4 @@
-package com.example.basiccrud.zumbo;
+package com.example.basiccrud.zumbo_managing;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
