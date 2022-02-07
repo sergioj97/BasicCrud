@@ -1,9 +1,11 @@
 package com.example.basiccrud.zumbo_managing;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Zumbo {
@@ -13,6 +15,10 @@ public class Zumbo {
 	private Long id;
 	private String nombre;
 	private Integer bibis;
+	
+	@OneToOne
+	@Column(nullable=true)
+	private Rewe rewe;
 	
 	public Zumbo() {
 		
