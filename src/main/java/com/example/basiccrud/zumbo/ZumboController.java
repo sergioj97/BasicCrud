@@ -26,13 +26,31 @@ public class ZumboController {
 	}
 	
 	@GetMapping("/detalles/{id}")
-	public String mostrarPantallaDetallesZumbo(Model model, @PathVariable long id) {
+	public String mostrarPantallaDetallesZumbo(Model model, @PathVariable Long id) {
 		Zumbo zumbo_seleccionado = repositorio_zumbos.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Id de zumbo no reconocido (id=)" + id));
 		
 		model.addAttribute("zumbo_seleccionado", zumbo_seleccionado);
 		
 		return "template_detalles_zumbo";
+	}
+	
+	@GetMapping("/detalles/{id}/incrementar")
+	public String incrementar_bibis(@PathVariable Long id) {
+		Zumbo zumbo_seleccionado = repositorio_zumbos.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Id de zumbo no reconocido (id=)" + id));
+		
+		zumbo_seleccionado.setBibis(zumbo_seleccionado.getBibis() + 1);
+		repositorio_zumbos.save(zumbo_seleccionado);
+				
+		return "redirect:/zumbos/detalles/" + id;
+	}
+	
+	@GetMapping("/detalles/{id}/borrar")
+	public String borrarZumboPorId(@PathVariable Long id) {
+		repositorio_zumbos.deleteById(id);
+		
+		return "redirect:/zumbos/lista";
 	}
 	
 	@GetMapping("/crear")
