@@ -2,6 +2,8 @@ package com.example.basiccrud.zumbo_managing;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,6 +71,18 @@ public class ZumboController {
 		return "redirect:/zumbos/detalles/" + id;
 	}
 	
+	
+	@GetMapping("/lista_rewes")
+	public String mostrarPantallaListaRewes(Model model) {
+		model.addAttribute("lista_rewes", repositorio_rewes.findAll());
+		return "template_lista_rewes";
+	}
+	
+	@GetMapping("/detalles_rewe/{id}")
+	public String mostrarPantallaDetallesRewe(Model model, @PathVariable Long id) {
+		model.addAttribute("rewe_seleccionado", repositorio_rewes.findById(id));
+		return "template_lista_rewes";
+	}
 	
 	@GetMapping("/crear_rewe")
 	public String mostrarPantallaCrearRewe() {
