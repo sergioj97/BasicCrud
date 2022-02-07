@@ -18,6 +18,9 @@ public class ZumboController {
 	@Autowired
 	private ZumboRepository repositorio_zumbos;
 	
+	@Autowired
+	private ReweRepository repositorio_rewes;
+	
 	@GetMapping("/lista")
 	public String mostrarPantallaListaZumbos(Model model) {
 		List<Zumbo> lista_zumbos = repositorio_zumbos.findAll();
@@ -66,12 +69,18 @@ public class ZumboController {
 		return "redirect:/zumbos/detalles/" + id;
 	}
 	
+	
+	@GetMapping("/crear_rewe")
+	public String mostrarPantallaCrearRewe() {
+		return "template_crear_rewe";
+	}
+	
 	@PostMapping("/crear_rewe")
-	public String mostrarPantallaCrearRewe(Model model, @RequestParam String input_nombre, @RequestParam Integer input_bibis) {
-		Zumbo nuevo_zumbo = new Zumbo(input_nombre, input_bibis);
-		repositorio_zumbos.save(nuevo_zumbo);
+	public String crearRewe(Model model, @RequestParam String input_nombre) {
+		Rewe nuevo_rewe = new Rewe(input_nombre);
+		repositorio_rewes.save(nuevo_rewe);
 		
-		return "redirect:/zumbos/lista";
+		return "redirect:/zumbos/lista_rewes";
 	}
 	
 
