@@ -10,7 +10,7 @@ public class Zumbo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	private String nombre;
 	private Integer bibis;
 	
