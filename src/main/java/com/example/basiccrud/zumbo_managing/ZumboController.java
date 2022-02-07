@@ -35,8 +35,28 @@ public class ZumboController {
 		return "template_detalles_zumbo";
 	}
 	
+	@GetMapping("/detalles/{id}/borrar")
+	public String borrarZumboPorId(@PathVariable Long id) {
+		repositorio_zumbos.deleteById(id);
+		
+		return "redirect:/zumbos/lista";
+	}
+	
+	@GetMapping("/crear_zumbo")
+	public String mostrarPantallaCrearZumbo(Model model) {
+		return "template_crear_zumbo";
+	}
+	
+	@PostMapping("/crear_zumbo")
+	public String crearZumbo(Model model, @RequestParam String input_nombre, @RequestParam Integer input_bibis) {
+		Zumbo nuevo_zumbo = new Zumbo(input_nombre, input_bibis);
+		repositorio_zumbos.save(nuevo_zumbo);
+		
+		return "redirect:/zumbos/lista";
+	}
+	
 	@GetMapping("/detalles/{id}/incrementar")
-	public String incrementar_bibis(@PathVariable Long id) {
+	public String incrementarBibis(@PathVariable Long id) {
 		Zumbo zumbo_seleccionado = repositorio_zumbos.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Id de zumbo no reconocido (id=)" + id));
 		
@@ -46,24 +66,13 @@ public class ZumboController {
 		return "redirect:/zumbos/detalles/" + id;
 	}
 	
-	@GetMapping("/detalles/{id}/borrar")
-	public String borrarZumboPorId(@PathVariable Long id) {
-		repositorio_zumbos.deleteById(id);
-		
-		return "redirect:/zumbos/lista";
-	}
-	
-	@GetMapping("/crear")
-	public String mostrarPantallaCrearZumbo(Model model) {
-		return "template_crear_zumbo";
-	}
-	
-	@PostMapping("/crear")
-	public String mostrarPantallaCrearZumbo(Model model, @RequestParam String input_nombre, @RequestParam Integer input_bibis) {
+	@PostMapping("/crear_rewe")
+	public String mostrarPantallaCrearRewe(Model model, @RequestParam String input_nombre, @RequestParam Integer input_bibis) {
 		Zumbo nuevo_zumbo = new Zumbo(input_nombre, input_bibis);
 		repositorio_zumbos.save(nuevo_zumbo);
 		
 		return "redirect:/zumbos/lista";
 	}
+	
 
 }
