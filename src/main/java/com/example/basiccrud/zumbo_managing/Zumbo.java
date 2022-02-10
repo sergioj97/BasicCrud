@@ -16,9 +16,9 @@ public class Zumbo {
 	private String nombre;
 	private Integer bibis;
 	
-	@OneToOne
-	@Column(nullable=true)
-	private Rewe rewe;
+	//@OneToOne
+	//@Column(nullable=true)
+	//private Rewe rewe;
 	
 	public Zumbo() {
 		
